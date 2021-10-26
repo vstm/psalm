@@ -23,45 +23,45 @@ class Generator implements Traversable {
      * @psalm-ignore-nullable-return
      * @return ?TValue Can return any type.
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return void Any returned value is ignored.
      */
-    public function next() {}
+    public function next(): void {}
 
     /**
      * @return TKey scalar on success, or null on failure.
      */
-    public function key() {}
+    public function key(): mixed {}
 
     /**
      * @return bool The return value will be casted to boolean and then evaluated.
      */
-    public function valid() {}
+    public function valid(): bool {}
 
     /**
      * @return void Any returned value is ignored.
      */
-    public function rewind() {}
+    public function rewind(): void {}
 
     /**
      * @return TReturn Can return any type.
      */
-    public function getReturn() {}
+    public function getReturn(): mixed {}
 
     /**
      * @param TSend $value
      * @psalm-ignore-nullable-return
      * @return ?TValue Can return any type.
      */
-    public function send($value) {}
+    public function send(mixed $value): mixed {}
 
     /**
      * @psalm-ignore-nullable-return
      * @return ?TValue Can return any type.
      */
-    public function throw(Throwable $exception) {}
+    public function throw(Throwable $exception): mixed {}
 }
 
 /**

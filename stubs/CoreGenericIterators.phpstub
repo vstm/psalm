@@ -11,7 +11,7 @@ interface IteratorAggregate extends Traversable {
     /**
      * @return Traversable<TKey, TValue> An instance of an object implementing Iterator or Traversable
      */
-    public function getIterator();
+    public function getIterator(): Traversable;
 }
 
 /**
@@ -26,29 +26,29 @@ interface Iterator extends Traversable {
      * @return TValue|null returns current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current();
+    public function current(): mixed;
 
     /**
      * @return void Any returned value is ignored.
      */
-    public function next();
+    public function next(): void;
 
     /**
      * @return TKey|null current key or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key();
+    public function key(): mixed;
 
     /**
      * @return bool The return value will be casted to boolean and then evaluated.
      *              Returns true on success or false on failure.
      */
-    public function valid();
+    public function valid(): bool;
 
     /**
      * @return void Any returned value is ignored.
      */
-    public function rewind();
+    public function rewind(): void;
 }
 
 /**
@@ -61,7 +61,7 @@ interface OuterIterator extends Iterator {
     /**
      * @return Iterator<TKey, TValue>
      */
-    public function getInnerIterator();
+    public function getInnerIterator(): Iterator;
 }
 
 /**
@@ -75,12 +75,12 @@ interface RecursiveIterator extends Iterator {
     /**
      * @return bool true if the current entry can be iterated over, otherwise returns false.
      */
-    public function hasChildren();
+    public function hasChildren(): bool;
 
     /**
      * @return RecursiveIterator<TKey, TValue> An iterator for the current entry.
      */
-    public function getChildren();
+    public function getChildren(): RecursiveIterator;
 }
 
 /**
@@ -98,7 +98,7 @@ interface SeekableIterator extends Iterator {
      *
      * @since 5.1.0
      */
-    public function seek($position);
+    public function seek($position): void;
 }
 
 /**
@@ -120,13 +120,13 @@ class IteratorIterator implements OuterIterator {
      * @return TValue|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey|null current key value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 /**
@@ -143,29 +143,29 @@ class AppendIterator extends IteratorIterator {
      * @param TIterator $iterator
      * @return void
      */
-    public function append(Iterator $iterator) {}
+    public function append(Iterator $iterator): void {}
 
     /**
      * @return ArrayIterator<TKey, TValue>
      */
-    public function getArrayIterator() {}
+    public function getArrayIterator(): ArrayIterator {}
 
     /**
      * @return int
      */
-    public function getIteratorIndex() {}
+    public function getIteratorIndex(): int {}
 
     /**
      * @return TValue|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 /**
@@ -188,132 +188,132 @@ class ArrayIterator implements SeekableIterator, ArrayAccess, Serializable, Coun
      * @param TKey $index The offset being checked.
      * @return bool true if the offset exists, otherwise false
      */
-    public function offsetExists($index) { }
+    public function offsetExists($index): bool { }
 
     /**
      * @param TKey $index The offset to get the value from.
      * @return TValue|null The value at offset index, null when accessing invalid indexes
      * @psalm-ignore-nullable-return
      */
-    public function offsetGet($index) { }
+    public function offsetGet($index): mixed { }
 
     /**
      * @param TKey $index The index to set for.
      * @param TValue $newval The new value to store at the index.
      * @return void
      */
-    public function offsetSet($index, $newval) { }
+    public function offsetSet($index, $newval): oid { }
 
     /**
      * @param TKey $index The offset to unset.
      * @return void
      */
-    public function offsetUnset($index) { }
+    public function offsetUnset($index): void { }
 
     /**
      * @param TValue $value The value to append.
      * @return void
      */
-    public function append($value) { }
+    public function append($value): void { }
 
     /**
      * @return array<TKey, TValue> A copy of the array, or array of public properties
      *                             if ArrayIterator refers to an object.
      */
-    public function getArrayCopy() { }
+    public function getArrayCopy(): array { }
 
     /**
      * @return int The number of elements or public properties in the associated
      *             array or object, respectively.
      */
-    public function count() { }
+    public function count(): int { }
 
     /**
      * @return int-mask-of<self::*> The current flags.
      */
-    public function getFlags() { }
+    public function getFlags(): int { }
 
     /**
      * @param int-mask-of<self::*> $flags bitmask
      * @return void
      */
-    public function setFlags($flags) { }
+    public function setFlags($flags): void { }
 
     /**
      * @return void
      */
-    public function asort() { }
+    public function asort(): void { }
 
     /**
      * @return void
      */
-    public function ksort() { }
+    public function ksort(): void { }
 
     /**
      * @param callable(TValue,TValue):int $cmp_function The compare function used for the sort.
      * @return void
      */
-    public function uasort($cmp_function) { }
+    public function uasort($cmp_function): void { }
 
     /**
      * @param callable(TKey,TKey):int $cmp_function The compare function used for the sort.
      * @return void
      */
-    public function uksort($cmp_function) { }
+    public function uksort($cmp_function): void { }
 
     /**
      * @return void
      */
-    public function natsort() { }
+    public function natsort(): void { }
 
     /**
      * @return void
      */
-    public function natcasesort() { }
+    public function natcasesort(): void { }
 
     /**
      * @param string $serialized The serialized ArrayIterator object to be unserialized.
      * @return void
      */
-    public function unserialize($serialized) { }
+    public function unserialize($serialized): void { }
 
     /**
      * @return string The serialized ArrayIterator
      */
-    public function serialize() { }
+    public function serialize(): string { }
 
     /**
      * @return void
      */
-    public function rewind() { }
+    public function rewind(): void { }
 
     /**
      * @return TValue|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() { }
+    public function current(): mixed { }
 
     /**
      * @return TKey|null The current array key or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() { }
+    public function key(): mixed { }
 
     /**
      * @return void
      */
-    public function next() { }
+    public function next(): void { }
 
     /**
      * @return bool
      */
-    public function valid() { }
+    public function valid(): bool { }
 
     /**
      * @param int $position The position to seek to.
      * @return void
      */
-    public function seek($position) { }
+    public function seek($position): void { }
 }
 
 /**
@@ -329,12 +329,12 @@ class FilterIterator extends IteratorIterator {
     /**
      * @return TValue Can return any type.
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey scalar on success, or null on failure.
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 /**
@@ -367,13 +367,13 @@ class CachingIterator extends IteratorIterator implements OuterIterator , ArrayA
      * @return TValue|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey|null current key or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 /**
@@ -395,13 +395,13 @@ class CallbackFilterIterator extends FilterIterator implements OuterIterator  {
      * @return TValue|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey|null current key or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 /**
@@ -414,21 +414,21 @@ class DirectoryIterator extends SplFileInfo implements SeekableIterator {
     /**
      * @return self
      */
-    public function current() {}
+    public function current(): self {}
     /**
      * @return int|false
      * @psalm-ignore-falsable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 
     /**
      * @return void
      */
-    public function next(){}
+    public function next(): void {}
     /**
      * @return void
      */
-    public function rewind(){}
+    public function rewind(): void {}
 
     /**
      * @param int $position
@@ -438,7 +438,7 @@ class DirectoryIterator extends SplFileInfo implements SeekableIterator {
     /**
      * @return bool
      */
-    public function valid(){}
+    public function valid(): bool {}
 }
 
 /**
@@ -452,20 +452,20 @@ class EmptyIterator implements Iterator {
     /**
      * @return empty
      */
-    public function key() {}
+    public function key(): mixed {}
     /**
      * @return void
      */
-    public function next() {}
+    public function next(): void {}
     /**
      * @return void
      */
-    public function rewind() {}
+    public function rewind(): void {}
 
     /**
      * @return false
      */
-    public function valid() {}
+    public function valid(): bool {}
 }
 
 /**
@@ -494,7 +494,7 @@ class FilesystemIterator extends DirectoryIterator
      * @return FilesystemIterator|SplFileInfo|string|null
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
     /**
      * @return int-mask<self::CURRENT_AS_PATHNAME,self::CURRENT_AS_FILEINFO,self::CURRENT_AS_SELF,self::KEY_AS_PATHNAME,self::KEY_AS_FILENAME,self::FOLLOW_SYMLINKS,self::NEW_CURRENT_AND_KEY,self::SKIP_DOTS,self::UNIX_PATH>
      */
@@ -509,7 +509,7 @@ class FilesystemIterator extends DirectoryIterator
      * @return string|null
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 
@@ -540,13 +540,13 @@ class InfiniteIterator extends IteratorIterator {
      * @return TValue|null current value or null if iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey|null current key or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 /**
@@ -567,13 +567,13 @@ class LimitIterator extends IteratorIterator implements OuterIterator {
      * @return TValue|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey|null current key or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 
@@ -594,13 +594,13 @@ class NoRewindIterator extends IteratorIterator {
      * @return TValue|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 /**
@@ -644,7 +644,7 @@ class MultipleIterator implements Iterator {
      *
      * @return array<array-key, TValue|null>
      */
-    public function current() {}
+    public function current(): mixed {}
     /**
      * @param Iterator<TKey,TValue> $iterator
      * @return void
@@ -657,7 +657,7 @@ class MultipleIterator implements Iterator {
     /**
      * @return array<array-key, TValue|null>
      */
-    public function key() {}
+    public function key(): mixed {}
     /**
      * @param int-mask-of<self::MIT_*> $flags
      * @return void
@@ -686,19 +686,19 @@ abstract class RecursiveFilterIterator extends FilterIterator implements Recursi
     /**
      * @return bool
      */
-    public function hasChildren() {}
+    public function hasChildren(): bool {}
 
     /**
      * @return TValue|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 /**
@@ -712,7 +712,7 @@ class ParentIterator extends RecursiveFilterIterator implements RecursiveIterato
     /**
      * @return bool
      */
-    public function accept() {}
+    public function accept(): bool {}
     /**
      * @param RecursiveIterator<TKey, TValue> $iterator
      */
@@ -725,27 +725,27 @@ class ParentIterator extends RecursiveFilterIterator implements RecursiveIterato
     /**
      * @return bool
      */
-    public function hasChildren() {}
+    public function hasChildren(): bool {}
     /**
      * @return void
      */
-    public function next() {}
+    public function next(): void {}
     /**
      * @return void
      */
-    public function rewind() {}
+    public function rewind(): void {}
 
     /**
      * @return TValue|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey|null current key or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 /**
@@ -768,18 +768,18 @@ class RecursiveArrayIterator extends ArrayIterator implements RecursiveIterator 
     /**
      * @return bool
      */
-    public function hasChildren() {}
+    public function hasChildren(): bool {}
     /**
      * @return TValue|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey|null current key or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 /**
@@ -811,19 +811,19 @@ class RecursiveCachingIterator extends CachingIterator implements RecursiveItera
     /**
      * @return bool
      */
-    public function hasChildren() {}
+    public function hasChildren(): bool {}
 
     /**
      * @return TValue|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey|null current key or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 /**
@@ -848,17 +848,17 @@ class RecursiveCallbackFilterIterator extends CallbackFilterIterator implements 
     /**
      * @return bool
      */
-    public function hasChildren() {}
+    public function hasChildren(): bool {}
 
     /**
      * @return TValue|null current value or null when iterator is drained
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey|null current value or null when iterator is drained
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 /**
@@ -898,13 +898,13 @@ class RecursiveDirectoryIterator extends FilesystemIterator implements Recursive
      * @return RecursiveDirectoryIterator|string|SplFileInfo|null current value or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return string|null current key or null when iterator is drained
      * @psalm-ignore-nullable-return
      */
-    public function key() {}
+    public function key(): mixed {}
 }
 
 
@@ -1006,7 +1006,7 @@ class RecursiveTreeIterator extends RecursiveIteratorIterator implements OuterIt
     /**
      * @return string
      */
-    public function current() {}
+    public function current(): string {}
     /**
      * @return void
      */
@@ -1031,11 +1031,11 @@ class RecursiveTreeIterator extends RecursiveIteratorIterator implements OuterIt
     /**
      * @return string
      */
-    public function key() {}
+    public function key(): string {}
     /**
      * @return void
      */
-    public function next() {}
+    public function next(): void {}
     /**
      * @return void
      */
@@ -1043,7 +1043,7 @@ class RecursiveTreeIterator extends RecursiveIteratorIterator implements OuterIt
     /**
      * @return void
      */
-    public function rewind() {}
+    public function rewind(): void {}
     /**
      * @return void
      */
@@ -1057,7 +1057,7 @@ class RecursiveTreeIterator extends RecursiveIteratorIterator implements OuterIt
     /**
      * @return bool
      */
-    public function valid() {}
+    public function valid(): bool {}
 }
 
 /**
@@ -1085,10 +1085,10 @@ class RegexIterator extends FilterIterator {
     /**
      * @return TValue Can return any type.
      */
-    public function current() {}
+    public function current(): mixed {}
 
     /**
      * @return TKey scalar on success, or null on failure.
      */
-    public function key() {}
+    public function key(): mixed {}
 }
