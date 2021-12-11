@@ -705,12 +705,6 @@ class TypeCombiner
                     );
                 }
 
-                if (is_string($candidate_property_name)
-                    && isset($type->class_strings[$candidate_property_name])
-                ) {
-                    $combination->objectlike_class_strings[$candidate_property_name] = true;
-                }
-
                 if (!$type->previous_value_type) {
                     unset($possibly_undefined_entries[$candidate_property_name]);
                 }
