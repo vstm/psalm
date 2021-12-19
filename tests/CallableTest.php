@@ -1268,7 +1268,7 @@ class CallableTest extends TestCase
                     function foo(string $c) : void {
                         takesCallableReturningString([$c, "bar"]);
                     }',
-                'error_message' => 'InvalidScalarArgument',
+                'error_message' => 'InvalidArgument',
             ],
             'inexistantCallableinCallableString' => [
                 '<?php
