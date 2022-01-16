@@ -493,6 +493,20 @@ class AnnotationTest extends TestCase
                      */
                     class A {}',
             ],
+            'multipeLineGenericArrayInCallable' => [
+                '<?php
+                    /**
+                     * @psalm-type TypedArrayHandler callable(array<string>): void
+                     *
+                     * @psalm-type MiddlewareArray = callable(array<
+                     *     class-string<\Exception>,
+                     *     array<int, string>
+                     * >): void
+                     *
+                     * Foo Bar
+                     */
+                    class A {}',
+            ],
             'builtInClassInAShape' => [
                 '<?php
                     /**
